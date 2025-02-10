@@ -84,7 +84,7 @@
             </div>
           </div>
           <div id="w-node-_8f18df15-d115-5aae-a4c9-846b42b4f180-30bb93b9" class="container-casestudypreview-image">
-            <video loop muted playsinline poster="images/Umba-Preview.png" class="image-casestudypreview">
+            <video autoplay loop muted playsinline poster="images/Umba-Preview.png" class="image-casestudypreview">
               <source src="images/Umba_Preview_480p.webm" type="video/webm" media="(max-width: 480px)">
               <source src="images/Umba_Preview_720p.webm" type="video/webm" media="(max-width: 720px)">
               <source src="images/Umba_Preview_1080p.webm" type="video/webm" media="(max-width: 1080px)">
@@ -152,26 +152,14 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const container = document.querySelector('.container-casestudypreview-image');
-      const video = container.querySelector('video');
+      const video = document.querySelector('.container-casestudypreview-image video');
       
-      container.addEventListener('mouseenter', function() {
-        video.play();
-      });
-      
-      container.addEventListener('mouseleave', function() {
-        video.pause();
-        video.currentTime = 0;  // Reset to beginning when mouse leaves
-      });
-
-      // Touch device support
-      container.addEventListener('touchstart', function() {
-        if (video.paused) {
+      // Add event listener for when the video ends
+      video.addEventListener('ended', function() {
+        // Wait for 2 seconds before playing again
+        setTimeout(() => {
           video.play();
-        } else {
-          video.pause();
-          video.currentTime = 0;
-        }
+        }, 2000);
       });
     });
   </script>
